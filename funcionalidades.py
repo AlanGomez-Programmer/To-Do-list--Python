@@ -16,9 +16,9 @@ archivos = {
 
 def limpiar_pantalla():
     if os.name == 'nt':
-        print("cls")
+        os.system("cls")
     else: 
-        print("clean")
+        os.system("clean")
 
 def _cargar_datos(ruta_archivo):
     """Lee y retorna los datos del archivo JSON"""
