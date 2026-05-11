@@ -18,9 +18,24 @@ def agregar_tarea():
         input("Presione ENTER para regresar... ")
         return
 
-    i = 1
+    id_tipos_tareas = [int(id_tipo) for id_tipo in tipos_tareas]
+
     for id, tipo in tipos_tareas.items():
-        print(f"{1. }")
+        print(f"  {id}. {tipo}")
+
+    while True:
+        try:
+            opci_tipo = int(input("  Tipo de tarea seleccionado:  ").strip())
+
+            if not opci_tipo in id_tipos_tareas:
+                print("Error: La opción elegida no existe")
+                continue
+            else:
+                tipo_tarea_elegida = tipos_tareas[str(opci_tipo)]
+                break
+        except ValueError:
+            print("Error: Solo se aceptan números")
+            continue
 
     while True: 
         fecha_inicio = input("  Fecha Inicio (DD-MM-AA): ").strip()
@@ -42,28 +57,29 @@ def agregar_tarea():
             print("\n  Error: Debe ingresar bien la fecha")
             continue 
 
-    contador = 0
+    contador = 1
     for i in estado:
-        print(f"{i}. {estado[contador]}")
+        print(f"{contador}. {i}")
+        contador += 1
     
     while True:
         try:
             estado_tarea = int(input("Seleccione un estado: ").strip())
 
-            if estado_tarea < len(estado) or estado_tarea > len(estado):
+            if estado_tarea < 0 or estado_tarea > len(estado)+1:
                 print("Error: No existe esa opción elegida")
             else:
-                estado_elegido = contador[estado_tarea-1]
+                estado_elegido = estado[estado_tarea-1]
+                tarea = {
+                    "nombre": nombre,
+                    "descripción": descripcion,
+                    "tipo": tipo_tarea_elegida,
+                    "fecha inicio": fecha_inicio,
+                    "fecha entrega": fecha_entrega,
+                    "estado": estado_elegido
+                    }
+                break
         except ValueError:
             print("Error: Solo se permiten números")
-            continue
 
-    tarea = {
-        "nombre": nombre,
-        "descripción": descripcion,
-        "tipo": tipo
-    }
-
-    funcionalidades.crear(funcionalidades.archivos["tareas"], )
-
-agregar_tarea()
+    funcionalidades.crear(funcionalidades.archivos["tareas"],tarea)
