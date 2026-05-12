@@ -99,5 +99,3 @@ def listar_tareas():
         tareas = [[i,dato["nombre"], dato["descripción"], dato["tipo"], dato["fecha inicio"], dato["fecha entrega"], dato["estado"]] for i,(id,dato) in enumerate(tareas_registradas.items(), start=1)]
         print(tabulate(tareas, headers=['#','NOMBRE','DESCRIPCIÓN','TIPO','FECHA INICIO','FECHA ENTREGA', 'ESTADO']))
         print("="*110)
-
-listar_tareas()
