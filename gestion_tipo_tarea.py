@@ -1,10 +1,5 @@
 import funcionalidades
-
-def listar_tipos():
-    tipos_tareas = funcionalidades.leer_archivo(funcionalidades.archivos["tipo_tarea"])
-
-    for id, tipo in tipos_tareas.items():
-        print(f"  {id}. {tipo}")
+from tabulate import tabulate
 
 def validar_id():
     while True:
@@ -16,8 +11,9 @@ def validar_id():
             print("Aún no hay tipos de tareas registradas")
             print("Realiza tu primer registro de tipo de tarea")
         else:
-            print("  Tipos de tareas ya registrados:")
-            listar_tipos()
+            print("  Tipos de tareas ya registrados:\n")
+            tipos_datos = [[id, dato] for id,dato in tipos.items()]
+            print(tabulate(tipos_datos, headers=['ID', 'TIPO DE TAREA']))
 
         while True:
             id_existentes = [int(id_e) for id_e in tipos]
@@ -40,7 +36,7 @@ def validar_id():
                 print("  Error: Solo se perminten números")
                 continue
 
-def tipo_tarea():
+def agregar_tipo_tarea():
     funcionalidades.limpiar_pantalla()
     tipos = funcionalidades.leer_archivo(funcionalidades.archivos["tipo_tarea"])
 
@@ -61,4 +57,3 @@ def tipo_tarea():
             print("="*50)    
             input("Presione ENTER para salir...")        
             return
-           
