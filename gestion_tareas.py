@@ -1,4 +1,5 @@
 import funcionalidades
+from tabulate import tabulate
 
 estado = ["Pendiente", "En Proceso", "Finalizado"]
 
@@ -83,3 +84,18 @@ def agregar_tarea():
             print("Error: Solo se permiten números")
 
     funcionalidades.crear(funcionalidades.archivos["tareas"],tarea)
+
+def listar_tareas():
+    funcionalidades.limpiar_pantalla()
+    print("="*110)
+    print("LISTADO DE TAREAS\n".center(100))
+    tareas_registradas = funcionalidades.leer_archivo(funcionalidades.archivos["tareas"])
+
+    if len(tareas_registradas) == 0:
+        print("Error: No hay tareas registradas aún")
+        input("Ingrese ENTER para salir..")
+        return
+    else:
+        tareas = [[i,dato["nombre"], dato["descripción"], dato["tipo"], dato["fecha inicio"], dato["fecha entrega"], dato["estado"]] for i,(id,dato) in enumerate(tareas_registradas.items(), start=1)]
+        print(tabulate(tareas, headers=['#','NOMBRE','DESCRIPCIÓN','TIPO','FECHA INICIO','FECHA ENTREGA', 'ESTADO']))
+        print("="*110)
