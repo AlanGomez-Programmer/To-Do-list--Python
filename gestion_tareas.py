@@ -99,3 +99,49 @@ def listar_tareas():
         tareas = [[i,dato["nombre"], dato["descripción"], dato["tipo"], dato["fecha inicio"], dato["fecha entrega"], dato["estado"]] for i,(id,dato) in enumerate(tareas_registradas.items(), start=1)]
         print(tabulate(tareas, headers=['#','NOMBRE','DESCRIPCIÓN','TIPO','FECHA INICIO','FECHA ENTREGA', 'ESTADO']))
         print("="*110)
+
+def cambiar_estado_tarea():
+
+    tareas = funcionalidades.leer_archivo(funcionalidades.archivos["tareas"])
+    listar_tareas()
+    print("Cambio de Estado".center(100))
+
+    id_tareas = [[i, id] for i,(id) in enumerate(tareas, start=1)]
+
+    while True:  
+        try:
+            id_elegido = int(input("Ingrese el número de la tarea elegida: ").strip())
+        
+            id_elegido_corregido = id_elegido -1
+
+            if id_elegido > len(tareas) or id_elegido < 0:
+                print("Error: No existe ese número de tarea")
+            else:
+                id_tarea_elegida = id_tareas[id_elegido_corregido][1]
+            break
+        except ValueError:
+            print("Error: Solo se permiten números")
+            continue
+
+    contador = 1
+    estados = [[contador + i, estado[i]] for i in range(len(estado))]
+
+    print(tabulate(estados, headers=["#", "ESTADO"]))
+            
+    while True:
+        try:
+            estado_tarea = int(input("Seleccione un estado: ").strip())
+
+            if estado_tarea < 0 or estado_tarea > len(estado)+1:
+                print("Error: No existe esa opción elegida")
+                continue
+            else:
+                estado_elegido = estado[estado_tarea-1]
+                for id in tareas:
+                    if id_tarea_elegida == id:
+                        tareas[id]["estado"] = estado_elegido
+                        funcionalidades._guardar_datos(funcionalidades.archivos["tareas"], tareas)
+                        print("Cambio de estado exitoso")
+                        return
+        except ValueError:
+                    print("Error: Solo se permiten números")
