@@ -57,3 +57,21 @@ def agregar_tipo_tarea():
             print("="*50)    
             input("Presione ENTER para salir...")        
             return
+
+def listar_tipos():
+    tipos_tareas = funcionalidades.leer_archivo(funcionalidades.archivos["tipo_tarea"])
+
+    funcionalidades.limpiar_pantalla()
+    print("="*105)
+    print("TIPOS DE TAREAS".center(80))
+
+    if len(tipos_tareas) == 0:
+        print("Error: No tienes ningún tipo de tarea registrada\n")
+        input("Presione ENTER para salir")
+        return
+    else:
+        tipo_tarea = [[id, tipo] for id,tipo  in tipos_tareas.items()]
+        print(tabulate(tipo_tarea, headers=['ID', 'TIPO DE TAREA']))
+        print("="*105)
+        input("Presione ENTER para salir...")
+        return
