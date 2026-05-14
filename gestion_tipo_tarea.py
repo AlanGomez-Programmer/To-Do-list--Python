@@ -68,6 +68,7 @@ def listar_tipos():
     if len(tipos_tareas) == 0:
         print("Error: No tienes ningún tipo de tarea registrada\n")
         input("Presione ENTER para salir")
+        return
     else:
         tipo_tarea = [[id, tipo] for id,tipo  in tipos_tareas.items()]
         print(tabulate(tipo_tarea, headers=['ID', 'TIPO DE TAREA']))
