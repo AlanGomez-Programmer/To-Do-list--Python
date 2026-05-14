@@ -1,6 +1,6 @@
 import funcionalidades
-from gestion_tareas import agregar_tarea
-from gestion_tipo_tarea import tipo_tarea
+from gestion_tareas import agregar_tarea, listar_tareas, cambiar_estado_tarea
+from gestion_tipo_tarea import agregar_tipo_tarea, listar_tipos
 
 def menu_pricipal():
     while True: 
@@ -17,21 +17,17 @@ def menu_pricipal():
             opci = int(input("Ingrese opción elegida: ").strip())
 
             if opci == 1:
-                funcionalidades.limpiar_pantalla()
                 agregar_tarea()
             elif opci == 2:
-                funcionalidades.limpiar_pantalla()
+                listar_tareas()
             elif opci == 3: 
-                funcionalidades.limpiar_pantalla()
+                cambiar_estado_tarea()
             elif opci == 4:
-                funcionalidades.limpiar_pantalla()
-                tipo_tarea()
+                agregar_tipo_tarea()
             elif opci == 5:
-                funcionalidades.limpiar_pantalla()
+                listar_tipos()
             else:
                 print("Error: Esa opción no existe")
                 continue
         except ValueError:
             print("Error: Solo se permiten números")
-
-menu_pricipal()
