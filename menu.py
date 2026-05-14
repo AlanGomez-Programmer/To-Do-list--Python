@@ -11,7 +11,8 @@ def menu_pricipal():
         print("  2. Ver tareas")
         print("  3. Cambiar Estado de Tarea")
         print("  4. Regristrar Tipo de Tarea")
-        print("  5. Ver Tipo de Tarea Registada\n")
+        print("  5. Ver Tipo de Tarea Registada")
+        print("  6. Salir\n")
         print("="*50)
         try:
             opci = int(input("Ingrese opción elegida: ").strip())
@@ -26,6 +27,8 @@ def menu_pricipal():
                 agregar_tipo_tarea()
             elif opci == 5:
                 listar_tipos()
+            elif opci == 6: 
+                break
             else:
                 print("Error: Esa opción no existe")
                 continue
