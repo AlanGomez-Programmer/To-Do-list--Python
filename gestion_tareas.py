@@ -94,7 +94,7 @@ def listar_tareas():
     if len(tareas_registradas) == 0:
         print("Error: No hay tareas registradas aún")
         input("Ingrese ENTER para salir..")
-        return
+        return None
     else:
         tareas = [[i,dato["nombre"], dato["descripción"], dato["tipo"], dato["fecha inicio"], dato["fecha entrega"], dato["estado"]] for i,(id,dato) in enumerate(tareas_registradas.items(), start=1)]
         print(tabulate(tareas, headers=['#','NOMBRE','DESCRIPCIÓN','TIPO','FECHA INICIO','FECHA ENTREGA', 'ESTADO']))
@@ -103,7 +103,11 @@ def listar_tareas():
 def cambiar_estado_tarea():
 
     tareas = funcionalidades.leer_archivo(funcionalidades.archivos["tareas"])
-    listar_tareas()
+    lista = listar_tareas()
+
+    if lista == None:
+        return
+    
     print("Cambio de Estado".center(100))
 
     id_tareas = [[i, id] for i,(id) in enumerate(tareas, start=1)]
